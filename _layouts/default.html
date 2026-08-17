@@ -3,27 +3,55 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ page.title | default: site.title }}</title>
+    <title>{% if page.title and page.url != "/" %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.tagline }}{% endif %}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="author" content="{{ site.author }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page.title | default: site.title }}">
+    <meta property="og:description" content="{{ page.description | default: site.description }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:image" content="{{ '/assets/images/profile.jpg' | absolute_url }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%233B8C87'/><rect x='2' y='2' width='12' height='6' fill='%237FC6C2'/><rect x='2' y='9' width='12' height='5' fill='%239C5C93'/></svg>">
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
-      <div class="wrap">
-        <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
-        <nav>
-          <a href="{{ '/teaching/' | relative_url }}">Teaching</a>
-          <a href="{{ '/research/' | relative_url }}">Research</a>
-          <a href="{{ '/cv/' | relative_url }}">CV</a>
+      <div class="wrap header-inner">
+        <a class="brand" href="{{ '/' | relative_url }}">
+          <span class="brand-key" aria-hidden="true"></span>
+          <span class="brand-name">{{ site.title }}</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          {% for item in site.nav %}
+            <a href="{{ item.url | relative_url }}"{% if page.url contains item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+          {% endfor %}
         </nav>
       </div>
     </header>
 
-    <main class="wrap">
+    <main id="main" class="wrap">
       {{ content }}
     </main>
 
     <footer class="site-footer">
-      <div class="wrap">© {{ site.title }} — built with Jekyll</div>
+      <div class="wrap footer-inner">
+        <p class="footer-name">{{ site.author }}<span class="sep">/</span>Department of Geographic Information Science, University of Redlands</p>
+        <p class="footer-links">
+          <a href="mailto:{{ site.email }}">Email</a>
+          <a href="{{ site.scholar }}">Google Scholar</a>
+          <a href="{{ site.linkedin }}">LinkedIn</a>
+          <a href="{{ '/assets/CV_JaeheePark.pdf' | relative_url }}">CV (PDF)</a>
+        </p>
+        <p class="footer-meta">Built with Jekyll. Last updated {{ site.time | date: "%B %Y" }}.</p>
+      </div>
     </footer>
   </body>
 </html>

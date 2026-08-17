@@ -1,8 +1,28 @@
 title: "Jaehee Park"
-description: "Personal website"
-url: "https://geospatial-park.github.io" # replace USERNAME
-baseurl: "" # leave blank for user site, or set to "/repo" for project site
+tagline: "GIScience · Spatial Data Science · Urban Health"
+description: "Jaehee Park is a Visiting Assistant Professor of Geographic Information Science at the University of Redlands, studying human mobility, social sensing, and urban health with geospatial big data."
+author: "Jaehee Park"
+email: "jaehee_park@redlands.edu"
+linkedin: "https://www.linkedin.com/in/jaehee-park06"
+scholar: "https://scholar.google.com/citations?user=8722e1sAAAAJ&hl=en"
+orcid: ""
+
+url: "https://geospatial-park.github.io"
+baseurl: ""
+
 markdown: kramdown
 permalink: pretty
 
-# optional: collections or plugins can be added later
+nav:
+  - title: Research
+    url: /research/
+  - title: Teaching
+    url: /teaching/
+  - title: CV
+    url: /cv/
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
